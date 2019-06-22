@@ -3,6 +3,6 @@ export interface Book {
   title: string;
   description: string;
   rating: number;
-  thumbnail: string;
+  firstThumbnailUrl: string;
   authors: string[];
 }
