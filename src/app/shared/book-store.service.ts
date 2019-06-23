@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
+import { Book } from './book';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class BookStoreService {
         }
       }`;
 
-    return this.apollo.query<any>({ query }).pipe(
+    return this.apollo.watchQuery<any>({ query }).valueChanges.pipe(
         map(result => result.data.books)
       );
   }
@@ -48,4 +49,21 @@ export class BookStoreService {
       map(result => result.data.book)
     );
   }
+
+  createBook(book: Partial<Book>) {
+    const mutation = gql`
+      mutation CreateBook($book: BookInput!) {
+        createBook(book: $book) {
+          isbn
+          title
+          description
+        }
+      }`;
+
+    return this.apollo.mutate<any>({
+      mutation,
+      variables: { book }
+    });
+  }
+
 }

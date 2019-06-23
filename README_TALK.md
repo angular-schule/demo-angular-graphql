@@ -8,6 +8,17 @@
 
 `src/app/graphql.module.ts` und URI `https://api.angular.schule/graphql`
 
+```ts
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'no-cache'
+      },
+      query: {
+        fetchPolicy: 'no-cache'
+      }
+    }
+```
+
 ## 3. Service anpassen
 
 a) `import gql from 'graphql-tag';`
@@ -33,6 +44,8 @@ c) Query:
       );
   }
 ```
+
+
 
 
 

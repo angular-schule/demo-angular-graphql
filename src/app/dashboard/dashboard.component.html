@@ -1,14 +1,7 @@
-<div class="progress mb-4 mt-5" *ngIf="loading$ | async">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%">
-    Loading books...
-  </div>
-</div>
-
+<a class="btn btn-secondary" routerLink="/create">+ Create</a>
 
 <p>
   <br-book *ngFor="let b of books$ | async"
     [book]="b"
-    (rateUp)="doRateUp($event)"
-    (rateDown)="doRateDown($event)"
-    ></br-book>
+  ></br-book>
 </p>
