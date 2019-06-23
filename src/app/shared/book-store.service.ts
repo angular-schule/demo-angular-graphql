@@ -1,8 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-import { Book } from './book';
 
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
@@ -17,42 +13,39 @@ export class BookStoreService {
 
   getAll() {
 
-    return this.apollo.query({
-      query: gql`
-        query BookList {
-          books {
-            isbn
-            title
-            description
-            rating
-            firstThumbnailUrl
+    const query = gql`
+      query BookList {
+        books {
+          isbn
+          title
+          authors {
+            name
           }
-        }`
-      })
-      .pipe(
-        map(({ data }) => data['books'])
+        }
+      }`;
+
+    return this.apollo.query<any>({ query }).pipe(
+        map(result => result.data.books)
       );
   }
 
   getSingle(isbn: string) {
 
-    return this.apollo.query({
-      query: gql`
-        query BookSingle($isbn: ID!) {
-          book(isbn: $isbn) {
-            isbn
-            title
-            description
-            rating
-            firstThumbnailUrl
-          }
-        }`,
-        variables: {
-          isbn,
+    const query = gql`
+      query BookSingle($isbn: ID!) {
+        book(isbn: $isbn) {
+          isbn
+          title
+          description
+          firstThumbnailUrl
         }
-      })
-      .pipe(
-        map(({ data }) => data['book'])
-      );
+      }`;
+
+    return this.apollo.query<any>({
+      query,
+      variables: { isbn }
+    }).pipe(
+      map(result => result.data.book)
+    );
   }
 }

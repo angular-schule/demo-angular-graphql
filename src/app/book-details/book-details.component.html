@@ -1,24 +1,22 @@
 <div *ngIf="book$ | async as book" style="margin-top: 80px">
 
+  <img class="img-thumbnail float-right" [src]="book.firstThumbnailUrl" width="250">
+
   <h3>{{ book.title }}</h3>
 
   <p>
     <strong>ISBN:</strong> {{ book.isbn }}
   </p>
-  <p>
-    <strong>Rating:</strong> {{ book.rating }}
-  </p>
-
-  <hr>
 
   <p>
     {{ book.description }}
   </p>
 
-  <hr>
-  <a class="btn btn-success" routerLink="/dashboard">Back to Dashboard</a>
+  <a class="btn btn-secondary" routerLink="/dashboard">← Back to Dashboard</a>
 
 </div>
+
+<br style="clear: both;">
 
 
 

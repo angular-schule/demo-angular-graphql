@@ -17,20 +17,19 @@ c) Query:
 ```ts
   getAll() {
 
-    return this.apollo.query({
-      query: gql`
-        query BookList {
-          books {
-            isbn
-            title
-            description
-            rating
-            firstThumbnailUrl
+    const query = gql`
+      query BookList {
+        books {
+          isbn
+          title
+          authors {
+            name
           }
-        }`
-      })
-      .pipe(
-        map(({ data }) => data['books'])
+        }
+      }`;
+
+    return this.apollo.query<any>({ query }).pipe(
+        map(result => result.data.books)
       );
   }
 ```

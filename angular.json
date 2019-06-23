@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "book-rating": {
+    "book-query": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/book-rating",
+            "outputPath": "dist/book-query",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "book-rating:build"
+            "browserTarget": "book-query:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "book-rating:build:production"
+              "browserTarget": "book-query:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "book-rating:build"
+            "browserTarget": "book-query:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "book-rating-e2e": {
+    "book-query-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "book-rating:serve"
+            "devServerTarget": "book-query:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "book-rating:serve:production"
+              "devServerTarget": "book-query:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "book-rating"
+  "defaultProject": "book-query"
 }

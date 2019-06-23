@@ -2,12 +2,10 @@
 
 $primary: #C3002F;
 
-// npm install bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-button[disabled] {
-  cursor: not-allowed;
-  opacity: 0.2;
+html {
+  overflow-y:scroll;
 }
 
 $color_bg_1: #535EA7;
