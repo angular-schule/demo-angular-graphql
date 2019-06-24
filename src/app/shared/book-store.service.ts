@@ -1,74 +1,26 @@
 import { Injectable } from '@angular/core';
 
-import gql from 'graphql-tag';
-import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
-import { Book } from './book';
-import {
-  BookListQuery,
-  BookSingleQuery,
-  BookSingleQueryVariables,
-  CreateBookMutation,
-  CreateBookMutationVariables
-} from 'src/generated/graphql';
+import { EMPTY, of } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookStoreService {
 
-  constructor(private apollo: Apollo) { }
+  constructor() { }
 
   getAll() {
-
-    const query = gql`
-      query BookList {
-        books {
-          isbn
-          title
-          authors {
-            name
-          }
-        }
-      }`;
-
-    return this.apollo.watchQuery<BookListQuery>({ query }).valueChanges.pipe(
-        map(result => result.data.books)
-      );
+    return of([]);
   }
 
   getSingle(isbn: string) {
-
-    const query = gql`
-      query BookSingle($isbn: ID!) {
-        book(isbn: $isbn) {
-          isbn
-          title
-          description
-          firstThumbnailUrl
-        }
-      }`;
-
-    return this.apollo.watchQuery<BookSingleQuery, BookSingleQueryVariables>({
-      query,
-      variables: { isbn }
-    }).valueChanges.pipe(
-      map(result => result.data.book)
-    );
+    return EMPTY;
   }
 
-  createBook(book: Partial<Book>) {
-    const mutation = gql`
-      mutation CreateBook($book: BookInput!) {
-        createBook(book: $book) {
-          isbn
-        }
-      }`;
-
-    return this.apollo.mutate<CreateBookMutation, CreateBookMutationVariables>({
-      mutation,
-      variables: { book }
-    });
+  createBook(book: { isbn: string, title: string, description: string }) {
+    return EMPTY;
   }
 
 }
