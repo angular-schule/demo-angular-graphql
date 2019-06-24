@@ -4,7 +4,13 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { Book } from './book';
-import { of } from 'zen-observable';
+import {
+  BookListQuery,
+  BookSingleQuery,
+  BookSingleQueryVariables,
+  CreateBookMutation,
+  CreateBookMutationVariables
+} from 'src/generated/graphql';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +32,7 @@ export class BookStoreService {
         }
       }`;
 
-    return this.apollo.watchQuery<any>({ query }).valueChanges.pipe(
+    return this.apollo.watchQuery<BookListQuery>({ query }).valueChanges.pipe(
         map(result => result.data.books)
       );
   }
@@ -43,10 +49,10 @@ export class BookStoreService {
         }
       }`;
 
-    return this.apollo.query<any>({
+    return this.apollo.watchQuery<BookSingleQuery, BookSingleQueryVariables>({
       query,
       variables: { isbn }
-    }).pipe(
+    }).valueChanges.pipe(
       map(result => result.data.book)
     );
   }
@@ -59,7 +65,7 @@ export class BookStoreService {
         }
       }`;
 
-    return this.apollo.mutate<any>({
+    return this.apollo.mutate<CreateBookMutation, CreateBookMutationVariables>({
       mutation,
       variables: { book }
     });

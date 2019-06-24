@@ -39,7 +39,7 @@ c) Query:
         }
       }`;
 
-    return this.apollo.query<any>({ query }).pipe(
+    return this.apollo.watchQuery<any>({ query }).valueChanges.pipe(
         map(result => result.data.books)
       );
   }
@@ -60,10 +60,10 @@ c) Query:
         }
       }`;
 
-    return this.apollo.query<any>({
+    return this.apollo.watchQuery<any>({
       query,
       variables: { isbn }
-    }).pipe(
+    }).valueChanges.pipe(
       map(result => result.data.book)
     );
   }
@@ -72,18 +72,24 @@ c) Query:
 ## 4. Query 3: Service anpassen
 
 ```ts
-  createBook(book: Partial<Book>) {
-    const mutation = gql`
-      mutation CreateBook($book: BookInput!) {
-        createBook(book: $book) {
+  getSingle(isbn: string) {
+
+    const query = gql`
+      query BookSingle($isbn: ID!) {
+        book(isbn: $isbn) {
           isbn
+          title
+          description
+          firstThumbnailUrl
         }
       }`;
 
-    return this.apollo.mutate<any>({
-      mutation,
-      variables: { book }
-    });
+    return this.apollo.watchQuery<any>({
+      query,
+      variables: { isbn }
+    }).valueChanges.pipe(
+      map(result => result.data.book)
+    );
   }
 ```
 
@@ -113,6 +119,11 @@ npm install
 npm run codegen
 ```
 
+Jetzt mit Typen:
 
+```ts
+this.apollo.watchQuery<BookListQuery>
+this.apollo.watchQuery<BookSingleQuery, BookSingleQueryVariables>
+```
  
 

@@ -6,4 +6,3 @@ generates:
     plugins:
       - "typescript"
       - "typescript-operations"
-      - "typescript-apollo-angular"

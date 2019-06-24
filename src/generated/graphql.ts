@@ -1,6 +1,3 @@
-import gql from "graphql-tag";
-import { Injectable } from "@angular/core";
-import * as Apollo from "apollo-angular";
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -114,62 +111,3 @@ export type CreateBookMutationVariables = {
 export type CreateBookMutation = { __typename?: "Mutation" } & {
   createBook: Maybe<{ __typename?: "Book" } & Pick<Book, "isbn">>;
 };
-
-export const BookListDocument = gql`
-  query BookList {
-    books {
-      isbn
-      title
-      authors {
-        name
-      }
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: "root"
-})
-export class BookListGQL extends Apollo.Query<
-  BookListQuery,
-  BookListQueryVariables
-> {
-  document = BookListDocument;
-}
-export const BookSingleDocument = gql`
-  query BookSingle($isbn: ID!) {
-    book(isbn: $isbn) {
-      isbn
-      title
-      description
-      firstThumbnailUrl
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: "root"
-})
-export class BookSingleGQL extends Apollo.Query<
-  BookSingleQuery,
-  BookSingleQueryVariables
-> {
-  document = BookSingleDocument;
-}
-export const CreateBookDocument = gql`
-  mutation CreateBook($book: BookInput!) {
-    createBook(book: $book) {
-      isbn
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: "root"
-})
-export class CreateBookGQL extends Apollo.Mutation<
-  CreateBookMutation,
-  CreateBookMutationVariables
-> {
-  document = CreateBookDocument;
-}
