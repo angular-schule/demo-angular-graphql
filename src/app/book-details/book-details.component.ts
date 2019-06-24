@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
-import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { BookStoreService } from '../shared/book-store.service';
 })
 export class BookDetailsComponent implements OnInit {
 
-  book$: Observable<Book>;
+  book$: Observable<any>;
 
   constructor(private route: ActivatedRoute, private bs: BookStoreService) { }
 

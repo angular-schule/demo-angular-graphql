@@ -1,0 +1,12 @@
+# Verwendung:
+# const query = require('graphql-tag/loader!./book-list.graphql');
+
+query BookList {
+  books {
+    isbn
+    title
+    authors {
+      name
+    }
+  }
+}
