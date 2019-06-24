@@ -19,7 +19,7 @@
     }
 ```
 
-## 3. Service anpassen
+## 3. Query 1: Service anpassen
 
 a) `import gql from 'graphql-tag';`
 b) ctor: `private apollo: Apollo`
@@ -45,9 +45,49 @@ c) Query:
   }
 ```
 
+## 3. Query 2: Service anpassen
 
+```ts
+  getSingle(isbn: string) {
 
+    const query = gql`
+      query BookSingle($isbn: ID!) {
+        book(isbn: $isbn) {
+          isbn
+          title
+          description
+          firstThumbnailUrl
+        }
+      }`;
 
+    return this.apollo.query<any>({
+      query,
+      variables: { isbn }
+    }).pipe(
+      map(result => result.data.book)
+    );
+  }
+```
+
+## 4. Query 3: Service anpassen
+
+```ts
+  createBook(book: Partial<Book>) {
+    const mutation = gql`
+      mutation CreateBook($book: BookInput!) {
+        createBook(book: $book) {
+          isbn
+          title
+          description
+        }
+      }`;
+
+    return this.apollo.mutate<any>({
+      mutation,
+      variables: { book }
+    });
+  }
+```
 
 
  
