@@ -88,5 +88,31 @@ c) Query:
 ```
 
 
+
+
+### Extra: Codegen via 
+
+```bash
+npm install add @graphql-codegen/cli
+npx graphql-codegen init
+```
+
+```
+? What type of application are you building? ---> Application built with Angular
+? Where is your schema?: ---> https://api.angular.schule/graphql
+? Where are your operations and fragments?: ---> src/**/*.ts
+? Pick plugins: ---> TypeScript (required by other typescript plugins), TypeScript Operations (operations and fragments)
+? Where to write the output: ---> src/generated/graphql.ts
+? Do you want to generate an introspection file? ---> No
+? How to name the config file? ---> codegen.yml
+? What script in package.json should run the codegen? ---> codegen
+```
+
+```
+npm install
+npm run codegen
+```
+
+
  
 
