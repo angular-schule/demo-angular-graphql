@@ -77,8 +77,6 @@ c) Query:
       mutation CreateBook($book: BookInput!) {
         createBook(book: $book) {
           isbn
-          title
-          description
         }
       }`;
 

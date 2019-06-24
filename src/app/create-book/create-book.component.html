@@ -6,7 +6,7 @@
     <input formControlName="isbn" type="text" class="form-control" id="isbn">
 
     <div class="feedback-red" *ngIf="isInvalid('isbn')">
-  	  ISBN ist ungültig.
+  	  ISBN ist ungültig:
     </div>
 
     <div class="feedback-red" *ngIf="hasError('isbn', 'required')">
@@ -15,6 +15,10 @@
 
     <div class="feedback-red" *ngIf="hasError('isbn', 'minlength')">
       Die ISBN ist zu kurz.
+    </div>
+
+    <div class="feedback-red" *ngIf="hasError('isbn', 'pattern')">
+      Bitte geben Sie nur Ziffern an.
     </div>
   </div>
 

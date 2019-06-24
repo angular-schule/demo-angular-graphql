@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { Book } from './book';
+import { of } from 'zen-observable';
 
 @Injectable({
   providedIn: 'root'
@@ -55,8 +56,6 @@ export class BookStoreService {
       mutation CreateBook($book: BookInput!) {
         createBook(book: $book) {
           isbn
-          title
-          description
         }
       }`;
 

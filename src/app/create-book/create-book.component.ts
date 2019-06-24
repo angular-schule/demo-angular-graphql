@@ -16,7 +16,8 @@ export class CreateBookComponent {
   bookForm = new FormGroup({
     isbn: new FormControl('', [
       Validators.required,
-      Validators.minLength(3)
+      Validators.minLength(3),
+      Validators.pattern(/^([0-9]*)$/)
     ]),
     title: new FormControl('', Validators.required),
     description: new FormControl('')

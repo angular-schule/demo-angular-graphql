@@ -1,4 +1,4 @@
-<div *ngIf="book$ | async as book" style="margin-top: 80px">
+<div *ngIf="book$ | async as book">
 
   <img class="img-thumbnail float-right ml-4" [src]="book.firstThumbnailUrl" width="250">
 
@@ -12,7 +12,7 @@
     {{ book.description }}
   </p>
 
-  <a class="btn btn-secondary" routerLink="/dashboard">← Zurück zum Dashboard</a>
+  <a class="btn btn-secondary" routerLink="/dashboard">← Zurück</a>
 
 </div>
 

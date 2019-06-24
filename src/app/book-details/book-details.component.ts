@@ -8,7 +8,8 @@ import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'br-book-details',
-  templateUrl: './book-details.component.html'
+  templateUrl: './book-details.component.html',
+  styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent implements OnInit {
 

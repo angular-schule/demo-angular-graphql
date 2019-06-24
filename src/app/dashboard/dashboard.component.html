@@ -1,7 +1,13 @@
 <a class="btn btn-secondary" routerLink="/create">+ Create</a>
 
-<p>
-  <br-book *ngFor="let b of books$ | async"
+<p *ngIf="books$ | async as books; else loading">
+  <br-book *ngFor="let b of books"
     [book]="b"
   ></br-book>
 </p>
+
+<ng-template #loading>
+  <div class="spinner-box">
+    <i class="spinner-border"></i> Lade Bücher...
+  </div>
+</ng-template>
