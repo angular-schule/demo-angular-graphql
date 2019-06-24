@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookComponent } from './book/book.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { BookStoreService } from './shared/book-store.service';
 import { GraphQLModule } from './graphql.module';
 import { CreateBookComponent } from './create-book/create-book.component';
 

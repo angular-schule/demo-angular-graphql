@@ -99,7 +99,7 @@ c) Query:
 ### Extra: Codegen via @graphql-codegen/cli
 
 ```bash
-npm install add @graphql-codegen/cli
+npm install @graphql-codegen/cli
 npx graphql-codegen init
 ```
 

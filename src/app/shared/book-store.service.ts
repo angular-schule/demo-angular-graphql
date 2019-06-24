@@ -3,14 +3,13 @@ import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
-import { Book } from './book';
 import {
   BookListQuery,
   BookSingleQuery,
   BookSingleQueryVariables,
   CreateBookMutation,
   CreateBookMutationVariables
-} from 'src/generated/graphql';
+} from '../../generated/graphql';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +31,9 @@ export class BookStoreService {
         }
       }`;
 
-    return this.apollo.watchQuery<BookListQuery>({ query }).valueChanges.pipe(
+    return this.apollo.watchQuery<BookListQuery>({ query })
+      .valueChanges
+      .pipe(
         map(result => result.data.books)
       );
   }
@@ -52,12 +53,14 @@ export class BookStoreService {
     return this.apollo.watchQuery<BookSingleQuery, BookSingleQueryVariables>({
       query,
       variables: { isbn }
-    }).valueChanges.pipe(
+    })
+    .valueChanges
+    .pipe(
       map(result => result.data.book)
     );
   }
 
-  createBook(book: Partial<Book>) {
+  createBook(book: { isbn: string; title: string; description: string }) {
     const mutation = gql`
       mutation CreateBook($book: BookInput!) {
         createBook(book: $book) {
