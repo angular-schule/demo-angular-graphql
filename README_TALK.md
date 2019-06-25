@@ -1,4 +1,4 @@
-# Von 0 auf 100
+# Von 0 auf 100 (Speaker Spickzettel)
 
 ## 1. Schematic installieren
 
@@ -21,27 +21,26 @@
 
 ## 3. Query 1: Service anpassen
 
-a) `import gql from 'graphql-tag';`
-b) ctor: `private apollo: Apollo`
+a) ctor: `private apollo: Apollo`
+b) `import gql from 'graphql-tag';`
 c) Query:
 
 ```ts
   getAll() {
 
-    const query = gql`
-      query BookList {
-        books {
-          isbn
-          title
-          authors {
-            name
-          }
+    const query = gql`query BookList {
+      books {
+        isbn
+        title
+        authors {
+          name
         }
-      }`;
+      }
+    }`;
 
     return this.apollo.watchQuery<any>({ query }).valueChanges.pipe(
-        map(result => result.data.books)
-      );
+      map(result => result.data.books)
+    );
   }
 ```
 
@@ -49,16 +48,14 @@ c) Query:
 
 ```ts
   getSingle(isbn: string) {
-
-    const query = gql`
-      query BookSingle($isbn: ID!) {
-        book(isbn: $isbn) {
-          isbn
-          title
-          description
-          firstThumbnailUrl
-        }
-      }`;
+    const query = gql`query BookSingle($isbn: ID!) {
+      book(isbn: $isbn) {
+        isbn
+        title
+        description,
+        firstThumbnailUrl
+      }
+    }`;
 
     return this.apollo.watchQuery<any>({
       query,
@@ -69,27 +66,21 @@ c) Query:
   }
 ```
 
-## 4. Query 3: Service anpassen
+## 4. Mutation 3: Service anpassen
 
 ```ts
-  getSingle(isbn: string) {
-
-    const query = gql`
-      query BookSingle($isbn: ID!) {
-        book(isbn: $isbn) {
+  createBook(book: { isbn: string, title: string, description: string }) {
+    const mutation = gql`
+      mutation CreateBook($book: BookInput!) {
+        createBook(book: $book) {
           isbn
-          title
-          description
-          firstThumbnailUrl
         }
       }`;
 
-    return this.apollo.watchQuery<any>({
-      query,
-      variables: { isbn }
-    }).valueChanges.pipe(
-      map(result => result.data.book)
-    );
+    return this.apollo.mutate<any>({
+      mutation,
+      variables: { book }
+    });
   }
 ```
 
